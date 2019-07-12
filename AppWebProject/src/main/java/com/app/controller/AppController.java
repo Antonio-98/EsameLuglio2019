@@ -2,15 +2,21 @@ package com.app.controller;
 
 import java.util.Vector;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.app.model.Element;
 import com.app.service.AppService;
-import com.app.service.Element;
 
 @RestController
 public class AppController {
-
+		
+	//Allo start dell'applicazione viene creato l'oggetto appService, quindi viene effettuato il download e il parsing
+	@Autowired
+	AppService appService;
 	/*
 	 * @GetMapping("/stampa/{indice}") public String stampa(@PathVariable int
 	 * indice) { String s = AppService.printElement(indice); return s; }/*
@@ -21,11 +27,23 @@ public class AppController {
 
 	@GetMapping("/stampa/{indice}")
 	public Element stampa(@PathVariable int indice) {
-		return AppService.printElement(indice);
+		return appService.printElement(indice);
 	}
 
 	@GetMapping("/stampa")
 	public Vector<Element> stampa() {
-		return AppService.printElement();
+		return appService.printElement();
+	}
+	
+	/*@GetMapping("/dataFiltered")
+	public Vector<Element> dataFilter(@RequestParam(name="field", defaultValue="") String fielname) {
+		return appService.getFilteredData(fieldname, "", "");
+	}*/
+	
+	//esempio di filtro prova con numero 2006, ritorna tutti i dati con time_period=2006
+	@GetMapping("/filtro/{numero}")
+	public Vector<Element> data(@PathVariable int numero)
+		{
+		return appService.getFilteredData(numero);
 	}
 }
