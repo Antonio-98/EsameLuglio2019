@@ -12,6 +12,7 @@ import com.app.utils.Utils;
 public class AppService {
 
 	static Vector<Element> v = new Vector<Element>();
+	//usare invece un'array list
 	
 	
 	//Costruttore di AppService
