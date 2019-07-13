@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class AppController {
 	}
 
 	@GetMapping("/stampa")
-	public Vector<Element> stampa() {
+	public ArrayList<Element> stampa() {
 		return appService.printElement();
 	}
 	
@@ -42,7 +43,7 @@ public class AppController {
 	
 	//esempio di filtro prova con numero 2006, ritorna tutti i dati con time_period=2006
 	@GetMapping("/filtro/{numero}")
-	public Vector<Element> data(@PathVariable int numero)
+	public ArrayList<Element> data(@PathVariable int numero)
 		{
 		return appService.getFilteredData(numero);
 	}

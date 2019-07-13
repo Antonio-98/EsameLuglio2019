@@ -10,6 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.json.simple.JSONArray;
@@ -76,7 +77,7 @@ public class Utils {
 		}
 	}
 
-	public static void csvParse(Vector<Element> v, String filename) {
+	public static void csvParse(ArrayList<Element> v, String filename) {
 		boolean i = false;
 		// List<List<String>> records = new ArrayList<>();
 

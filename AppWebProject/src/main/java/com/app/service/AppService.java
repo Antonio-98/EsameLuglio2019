@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import com.app.utils.Utils;
 @Service
 public class AppService {
 
-	static Vector<Element> v = new Vector<Element>();
+	static ArrayList<Element> v = new ArrayList<Element>();
 	//usare invece un'array list
 	
 	
@@ -23,14 +24,14 @@ public class AppService {
 	}
 
 	
-	public Vector<Element> getFilteredData(int value){
+	public ArrayList<Element> getFilteredData(int value){
 		int i=0;
-		Vector<Element> newVector = new Vector<Element>();
+		ArrayList<Element> newArrayList = new ArrayList<Element>();
 		for(i=0; i<v.size(); i++)
 		{if (v.get(i).getTime_period()==value)
-			newVector.add(v.get(i));
+			newArrayList.add(v.get(i));
 		}		
-		return newVector;
+		return newArrayList;
 	}
 	
 
@@ -39,7 +40,7 @@ public class AppService {
 		return v.get(i);
 	}
 
-	public Vector<Element> printElement() {
+	public ArrayList<Element> printElement() {
 		return v;
 	}
 }
