@@ -42,9 +42,20 @@ public class AppController {
 	}*/
 	
 	//esempio di filtro prova con numero 2006, ritorna tutti i dati con time_period=2006
-	@GetMapping("/filtro/{numero}")
-	public ArrayList<Element> data(@PathVariable int numero)
+	@GetMapping("/filtro/anno/{numero}")
+	public ArrayList<Element> data1(@PathVariable int numero)
 		{
 		return appService.getFilteredData(numero);
+	}
+	
+	@GetMapping("/filtro/area/{parameter}")
+	public ArrayList<Element> data2(@PathVariable String parameter)
+		{
+		return appService.getFilteredData("area",parameter);
+	}
+	@GetMapping("/filtro/indicator/{parameter}")
+	public ArrayList<Element> data3(@PathVariable String parameter)
+		{
+		return appService.getFilteredData("indicator",parameter);
 	}
 }

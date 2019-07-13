@@ -13,28 +13,48 @@ import com.app.utils.Utils;
 public class AppService {
 
 	static ArrayList<Element> v = new ArrayList<Element>();
-	//usare invece un'array list
-	
-	
-	//Costruttore di AppService
+
+	// Costruttore di AppService
 	@Autowired
 	public AppService() {
-		Utils.jsonDecode("http://data.europa.eu/euodp/data/api/3/action/package_show?id=yGVKnIzbkC2ZHpT6jQouDg");			
+		Utils.jsonDecode("http://data.europa.eu/euodp/data/api/3/action/package_show?id=yGVKnIzbkC2ZHpT6jQouDg");
 		Utils.csvParse(v, "dataset.csv");
 	}
 
-	
-	public ArrayList<Element> getFilteredData(int value){
-		int i=0;
+	public ArrayList<Element> getFilteredData(int value) {
+		int i = 0;
 		ArrayList<Element> newArrayList = new ArrayList<Element>();
-		for(i=0; i<v.size(); i++)
-		{if (v.get(i).getTime_period()==value)
-			newArrayList.add(v.get(i));
-		}		
+		for (i = 0; i < v.size(); i++)
+		// fare con lo switch tutti i case per i vari parametri
+		{
+			if (v.get(i).getTime_period() == value)
+				newArrayList.add(v.get(i));
+		}
 		return newArrayList;
 	}
-	
 
+	public ArrayList<Element> getFilteredData(String par, String value) {
+		int i = 0;
+		ArrayList<Element> newArrayList = new ArrayList<Element>();
+		if (par == "area") {
+			for (i = 0; i < v.size(); i++)
+			// fare con lo switch tutti i case per i vari parametri
+			{
+				if (v.get(i).getRef_area() == value)
+					newArrayList.add(v.get(i));
+			}
+		}
+		if (par == "indicator") {
+			for (i = 0; i < v.size(); i++)
+			// fare con lo switch tutti i case per i vari parametri
+			{
+				if (v.get(i).getIndicator() == value)
+					newArrayList.add(v.get(i));
+			}
+
+		}
+		return newArrayList;
+	}
 
 	public Element printElement(int i) {
 		return v.get(i);
