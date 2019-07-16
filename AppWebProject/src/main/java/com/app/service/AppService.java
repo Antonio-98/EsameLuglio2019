@@ -1,12 +1,12 @@
 package com.app.service;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.model.Element;
+import com.app.utils.Calculator;
 import com.app.utils.Utils;
 
 @Service
@@ -24,9 +24,7 @@ public class AppService {
 	public ArrayList<Element> getFilteredData(int value) {
 		int i = 0;
 		ArrayList<Element> newArrayList = new ArrayList<Element>();
-		for (i = 0; i < v.size(); i++)
-		// fare con lo switch tutti i case per i vari parametri
-		{
+		for (i = 0; i < v.size(); i++) {
 			if (v.get(i).getTime_period() == value)
 				newArrayList.add(v.get(i));
 		}
@@ -36,22 +34,39 @@ public class AppService {
 	public ArrayList<Element> getFilteredData(String par, String value) {
 		int i = 0;
 		ArrayList<Element> newArrayList = new ArrayList<Element>();
-		if (par == "area") {
-			for (i = 0; i < v.size(); i++)
-			// fare con lo switch tutti i case per i vari parametri
-			{
-				if (v.get(i).getRef_area() == value)
+		switch (par) {
+		case "area":
+			for (i = 0; i < v.size(); i++) {
+				if (v.get(i).getRef_area().equals(value))
 					newArrayList.add(v.get(i));
 			}
+			break;
+		case "indicator":
+			for (i = 0; i < v.size(); i++) {
+				if (v.get(i).getIndicator().equals(value))
+					newArrayList.add(v.get(i));
+			}
+			break;
 		}
-		if (par == "indicator") {
-			for (i = 0; i < v.size(); i++)
-			// fare con lo switch tutti i case per i vari parametri
-			{
-				if (v.get(i).getIndicator() == value)
+		return newArrayList;
+	}
+
+	public ArrayList<Element> getFilteredData(String par, float value) {
+		int i = 0;
+		ArrayList<Element> newArrayList = new ArrayList<Element>();
+		switch (par) {
+		case "min":
+			for (i = 0; i < v.size(); i++) {
+				if (v.get(i).getValue() > value)
 					newArrayList.add(v.get(i));
 			}
-
+			break;
+		case "max":
+			for (i = 0; i < v.size(); i++) {
+				if (v.get(i).getValue() < value)
+					newArrayList.add(v.get(i));
+			}
+			break;
 		}
 		return newArrayList;
 	}
@@ -62,5 +77,32 @@ public class AppService {
 
 	public ArrayList<Element> printElement() {
 		return v;
+	}
+
+	public float Sum() {
+		return Calculator.Sum(v);
+	}
+
+	public float Avg() {
+		return Calculator.Sum(v) / v.size();
+	}
+
+	public float Min() {
+		return Calculator.Min(v);
+	}
+
+	public float Max() {
+		return Calculator.Max(v);
+	}
+
+	public float StdDev() {
+		float value = 0;
+		int i;
+		double avg = Avg();
+		for (i = 0; i < v.size(); i++) {
+			value += Math.pow(v.get(i).getValue() - avg, 2);
+		}
+		value /= v.size();
+		return value;
 	}
 }

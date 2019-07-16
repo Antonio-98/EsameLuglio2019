@@ -11,7 +11,6 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -63,7 +62,7 @@ public class Utils {
 					}
 				}
 			}
-			
+
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
