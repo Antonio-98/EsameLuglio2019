@@ -1,5 +1,11 @@
 package com.app.utils;
 
+/**
+ * Libreria di metodi statici utilizzati all'avvio per inizializzare la Collection contenente i dati
+ * @author Giulia Temperini, Paolo Cacciatore
+ * @version 1.0
+ */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,19 +24,25 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
 import com.app.model.Element;
+import com.app.model.Metadata;
 
 public class Utils {
 
-	public static void jsonDecode(String url) {
-		// String url =
-		// "http://data.europa.eu/euodp/data/api/3/action/package_show?id=yGVKnIzbkC2ZHpT6jQouDg";
+	/**
+	 * Metodo che, dato un indirizzo ad una pagina codificata in JSON, ne effettua
+	 * la decodifica, per poi eseguire il download del dataset dall'URL ricavato
+	 * 
+	 * @param url      l'url della pagina JSON da decodificare
+	 * @param fileName nome del file scaricato
+	 */
+
+	public static void jsonDecode(String url, String fileName) {
+
 		boolean a = true;
 
 		try {
 
 			URLConnection openConnection = new URL(url).openConnection();
-			openConnection.addRequestProperty("User-Agent",
-					"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
 			InputStream in = openConnection.getInputStream();
 
 			String data = "";
@@ -41,7 +53,6 @@ public class Utils {
 
 				while ((line = buf.readLine()) != null) {
 					data += line;
-					// System.out.println( line );
 				}
 			} finally {
 				in.close();
@@ -55,9 +66,8 @@ public class Utils {
 					JSONObject o1 = (JSONObject) o;
 					String format = (String) o1.get("format");
 					String urlD = (String) o1.get("url");
-					// System.out.println(format + " | " + urlD);
 					if (format.equals("http://publications.europa.eu/resource/authority/file-type/CSV") && a) {
-						download(urlD, "dataset.csv");
+						download(urlD, fileName);
 						a = false;
 					}
 				}
@@ -70,27 +80,46 @@ public class Utils {
 		}
 	}
 
+	/**
+	 * Metodo privato utilizzato da {@link jsonDecode} per effettuare il download e
+	 * salvataggio nella directory
+	 * 
+	 * @param url
+	 * @param fileName
+	 * @throws Exception
+	 */
 	private static void download(String url, String fileName) throws Exception {
 		try (InputStream in = URI.create(url).toURL().openStream()) {
 			Files.copy(in, Paths.get(fileName));
 		}
 	}
 
-	public static void csvParse(ArrayList<Element> v, String filename) {
-		boolean i = false;
-		// List<List<String>> records = new ArrayList<>();
+	/**
+	 * Metodo utilizzato per effettuare il parsing del dataset creando un ArrayList
+	 * di oggetti della classe {@link Element}}
+	 * 
+	 * @param v        ArrayList che conterrà i record del dataset
+	 * @param header   ArrayList che conterrà i metadati del dataset
+	 * @param filename File contenente il dataset
+	 */
+	public static void csvParse(ArrayList<Element> v, ArrayList<Metadata> header, String filename) {
+		boolean flag = false;
 
 		try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
 
 			String line;
 
 			while ((line = br.readLine()) != null) {
-				if (i) {
-					String[] values = line.split(",");
-					// System.out.println(values.length);
+				String[] values = line.split(",");
 
-					// records.add(Arrays.asList(values));
-
+				if (!flag) {
+					for (int p = 0; p < values.length; p++) {
+						String attribute = values[p].substring(1, values[p].length() - 1);
+						String type = Element.type(attribute);
+						header.add(new Metadata(attribute, type));
+					}
+				}
+				if (flag) {
 					v.add(new Element(Integer.parseInt(values[0].substring(1, values[0].length() - 1)),
 							values[1].substring(1, values[1].length() - 1),
 							values[2].substring(1, values[2].length() - 1),
@@ -98,10 +127,9 @@ public class Utils {
 							values[4].substring(1, values[4].length() - 1),
 							Float.parseFloat(values[5].substring(1, values[5].length() - 1))));
 				}
-				i = true;
+				flag = true;
 			}
 
-			System.out.println(v.get(0).toString());
 			br.close();
 
 		} catch (IOException j) {

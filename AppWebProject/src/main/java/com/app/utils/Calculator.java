@@ -3,6 +3,7 @@ package com.app.utils;
 import java.util.ArrayList;
 
 import com.app.model.Element;
+import com.app.model.Stats;
 
 public class Calculator {
 	/*
@@ -10,7 +11,7 @@ public class Calculator {
 	 * conteggio
 	 */
 
-	private static float value = 0;
+	private static float value;
 
 	public static float Sum(ArrayList<Element> data) {
 		value=0;
@@ -39,6 +40,7 @@ public class Calculator {
 			}else {
 			}
 		}
+		
 		return value;
 	}
 }

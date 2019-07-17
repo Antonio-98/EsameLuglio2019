@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.model.Element;
+import com.app.model.Metadata;
+import com.app.model.Stats;
 import com.app.service.AppService;
 
 @RestController
@@ -18,79 +20,75 @@ public class AppController {
 	// effettuato il download e il parsing
 	@Autowired
 	AppService appService;
-	/*
-	 * @GetMapping("/stampa/{indice}") public String stampa(@PathVariable int
-	 * indice) { String s = AppService.printElement(indice); return s; }/*
-	 * 
-	 * @GetMapping("/hello") public String stampa() { //String s =
-	 * AppService.printElement(); return "hello"; }
-	 */
 
-	@GetMapping("/stampa/{indice}")
+
+	@GetMapping("/data/{indice}")
 	public Element stampa(@PathVariable int indice) {
 		return appService.printElement(indice);
 	}
 
-	@GetMapping("/stampa")
+	@GetMapping("/data")
 	public ArrayList<Element> stampa() {
 		return appService.printElement();
 	}
 
-	/*
-	 * @GetMapping("/dataFiltered") public Vector<Element>
-	 * dataFilter(@RequestParam(name="field", defaultValue="") String fielname) {
-	 * return appService.getFilteredData(fieldname, "", ""); }
-	 */
-
-	// esempio di filtro prova con numero 2006, ritorna tutti i dati con
-	// time_period=2006
-	@GetMapping("/filtro/anno/{numero}")
-	public ArrayList<Element> data1(@PathVariable int numero) {
-		return appService.getFilteredData(numero);
-	}
-
-	@GetMapping("/filtro/area/{parameter}")
-	public ArrayList<Element> data2(@PathVariable String parameter) {
-		return appService.getFilteredData("area", parameter);
-	}
-
-	@GetMapping("/filtro/indicator/{parameter}")
-	public ArrayList<Element> data3(@PathVariable String parameter) {
-		return appService.getFilteredData("indicator", parameter);
-	}
-
-	@GetMapping("/filtro/min/{value}")
-	public ArrayList<Element> data4(@PathVariable float value) {
-		return appService.getFilteredData("min", value);
-	}
-
-	@GetMapping("/filtro/max/{value}")
-	public ArrayList<Element> data5(@PathVariable float value) {
-		return appService.getFilteredData("max", value);
-	}
-
 	@GetMapping("/sum")
-	public float data6() {
+	public Stats data6() {
 		return appService.Sum();
 	}
 
 	@GetMapping("/avg")
-	public float data7() {
+	public Stats data7() {
 		return appService.Avg();
 	}
 
 	@GetMapping("/min")
-	public float data8() {
+	public Stats data8() {
 		return appService.Min();
 	}
 
 	@GetMapping("/max")
-	public float data9() {
+	public Stats data9() {
 		return appService.Max();
 	}
 
 	@GetMapping("/stddev")
-	public float data10() {
+	public Stats data10() {
 		return appService.StdDev();
 	}
+
+	@GetMapping("/metadata")
+	public ArrayList<Metadata> printMetadata() {
+		return appService.printMetadata();
+	}
+
+	@GetMapping("/stats")
+	public ArrayList<Stats> printStats() {
+		return appService.Stats();
+	}
+
+	@GetMapping("/filtroStringa/{field}/{value}")
+	public ArrayList<Element> data11(@PathVariable("field") String field, @PathVariable("value") String value) {
+		return appService.filter(field, "eq", value);
+	}
+
+	@GetMapping("/filtroValore/{field}/{operator}/{value}")
+	public ArrayList<Element> data11(@PathVariable("field") String field, @PathVariable("operator") String operator,
+			@PathVariable("value") float value) {
+		return appService.filter(field, operator, value);
+	}
+	@GetMapping("/filtroValore/{logicOperator}/{field}/{operator1}/{value1}/{operator2}/{value2}")
+	public ArrayList<Element> data13(@PathVariable("field") String field, @PathVariable("operator1") String operator1,
+			@PathVariable("value1") float value1,@PathVariable("logicOperator") String logicOperator, @PathVariable("operator2") String operator2,
+			@PathVariable("value2") float value2) {
+		return appService.multifilter(logicOperator,field, operator1, value1, operator2, value2);
+	}
+	
+	@GetMapping("/filtro/{value1}/{operator2}/{value2}")
+	public ArrayList<Element> data14(@PathVariable("value1") String value1,@PathVariable("operator2") String operator2,
+			@PathVariable("value2") float value2) {
+		return appService.multifilter(value1, operator2, value2);
+	}
+	
+	
 }

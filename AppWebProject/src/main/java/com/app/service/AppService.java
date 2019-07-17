@@ -1,11 +1,16 @@
 package com.app.service;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.app.model.Element;
+import com.app.model.Metadata;
+import com.app.model.Stats;
 import com.app.utils.Calculator;
 import com.app.utils.Utils;
 
@@ -13,65 +18,24 @@ import com.app.utils.Utils;
 public class AppService {
 
 	static ArrayList<Element> v = new ArrayList<Element>();
+	static ArrayList<Metadata> header = new ArrayList<Metadata>();
+	private FilterUtils<Element> filteredData = new FilterUtils<Element>();
 
 	// Costruttore di AppService
 	@Autowired
 	public AppService() {
-		Utils.jsonDecode("http://data.europa.eu/euodp/data/api/3/action/package_show?id=yGVKnIzbkC2ZHpT6jQouDg");
-		Utils.csvParse(v, "dataset.csv");
-	}
-
-	public ArrayList<Element> getFilteredData(int value) {
-		int i = 0;
-		ArrayList<Element> newArrayList = new ArrayList<Element>();
-		for (i = 0; i < v.size(); i++) {
-			if (v.get(i).getTime_period() == value)
-				newArrayList.add(v.get(i));
+		File f = new File("dataset.csv");
+		if (!f.exists()) {
+			Utils.jsonDecode("http://data.europa.eu/euodp/data/api/3/action/package_show?id=yGVKnIzbkC2ZHpT6jQouDg", "dataset.csv");
 		}
-		return newArrayList;
-	}
-
-	public ArrayList<Element> getFilteredData(String par, String value) {
-		int i = 0;
-		ArrayList<Element> newArrayList = new ArrayList<Element>();
-		switch (par) {
-		case "area":
-			for (i = 0; i < v.size(); i++) {
-				if (v.get(i).getRef_area().equals(value))
-					newArrayList.add(v.get(i));
-			}
-			break;
-		case "indicator":
-			for (i = 0; i < v.size(); i++) {
-				if (v.get(i).getIndicator().equals(value))
-					newArrayList.add(v.get(i));
-			}
-			break;
-		}
-		return newArrayList;
-	}
-
-	public ArrayList<Element> getFilteredData(String par, float value) {
-		int i = 0;
-		ArrayList<Element> newArrayList = new ArrayList<Element>();
-		switch (par) {
-		case "min":
-			for (i = 0; i < v.size(); i++) {
-				if (v.get(i).getValue() > value)
-					newArrayList.add(v.get(i));
-			}
-			break;
-		case "max":
-			for (i = 0; i < v.size(); i++) {
-				if (v.get(i).getValue() < value)
-					newArrayList.add(v.get(i));
-			}
-			break;
-		}
-		return newArrayList;
+		Utils.csvParse(v, header, "dataset.csv");
 	}
 
 	public Element printElement(int i) {
+		if (i > v.size() || i < 0) {
+			throw new RuntimeException("Indice non valido");
+			// throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
 		return v.get(i);
 	}
 
@@ -79,30 +43,73 @@ public class AppService {
 		return v;
 	}
 
-	public float Sum() {
-		return Calculator.Sum(v);
+	public Stats Sum() {
+		return new Stats("Sum", "Somma di tutti i valori", Calculator.Sum(v));
 	}
 
-	public float Avg() {
-		return Calculator.Sum(v) / v.size();
+	public Stats Avg() {
+		return new Stats("Avg", "Valore medio per pc_schools", Calculator.Sum(v) / v.size());
 	}
 
-	public float Min() {
-		return Calculator.Min(v);
+	public Stats Min() {
+		return new Stats("Min", "Valore minimo per pc_schools", Calculator.Min(v));
 	}
 
-	public float Max() {
-		return Calculator.Max(v);
+	public Stats Max() {
+		return new Stats("Max", "Valore massimo per pc_schools", Calculator.Max(v));
 	}
 
-	public float StdDev() {
+	public Stats StdDev() {
 		float value = 0;
 		int i;
-		double avg = Avg();
+		double avg = Avg().getValue();
 		for (i = 0; i < v.size(); i++) {
 			value += Math.pow(v.get(i).getValue() - avg, 2);
 		}
 		value /= v.size();
-		return value;
+		return new Stats("StdDev", "Deviazione standard dei valori per pc_schools", value);
 	}
+
+	public ArrayList<Metadata> printMetadata() {
+		return header;
+	}
+
+	public ArrayList<Stats> Stats() {
+		ArrayList<Stats> statistics = new ArrayList<Stats>();
+		statistics.add(Sum());
+		statistics.add(Avg());
+		statistics.add(Min());
+		statistics.add(Max());
+		statistics.add(StdDev());
+		return statistics;
+	}
+
+	public ArrayList<Element> filter(String fieldName, String operator, Object value) {
+		return (ArrayList<Element>) filteredData.select(v, fieldName, operator, value);
+
+	}
+
+	public ArrayList<Element> multifilter(String logicOperator, String fieldName, String operator1, Object value1,
+			String operator2, Object value2) {
+		ArrayList<Element> list1 = new ArrayList<Element>();
+		list1 = (ArrayList<Element>) filteredData.select(v, fieldName, operator1, value1);
+		if (logicOperator.equals("and")) {
+			return (ArrayList<Element>) filteredData.select(list1, fieldName, operator2, value2);
+		} else if (logicOperator.equals("or")) {
+			ArrayList<Element> list2 = new ArrayList<Element>();
+			list2 = (ArrayList<Element>) filteredData.select(v, fieldName, operator2, value2);
+			return filteredData.merge(list1, list2);
+		} else {
+			throw new RuntimeException("Operatore logico non valido");
+		}
+	}
+
+	public ArrayList<Element> multifilter(Object value1, String operator2, Object value2) {
+		ArrayList<Element> list1 = new ArrayList<Element>();
+		list1 = (ArrayList<Element>) filteredData.select(v, "ref_area", "eq", value1);
+		ArrayList<Element> list2 = new ArrayList<Element>();
+		list2 = (ArrayList<Element>) filteredData.select(list1, "value", operator2, value2);
+		return list2;
+	}
+
 }

@@ -1,35 +1,36 @@
 package com.app.model;
 
-public class Element {
+/**
+ * Classe che definisce il singolo record del dataset creando oggetti i cui
+ * attributi rappresentano le singole colonne di dati del file .csv utilizzato
+ * nel progetto. Sono implementati i canonici setter e getter, il metodo
+ * doString e un metodo che fornisce come stringa il tipo di ogni attributo
+ * 
+ * @author Giulia Temperini, Paolo Cacciatore
+ * @version 1.0
+ */
 
-	// private String observation;
+public class Element {
 	private int time_period;
 	private String ref_area;
 	private String indicator;
 	private String breakdown;
 	private String unit_measure;
 	private float value;
-	// private String flag;
-	// private String note;
 
 	public Element(int time_period, String ref_area, String indicator, String breakdown, String unit_measure,
 			float value)
 
-	{ // this.observation=observation;
+	{
 		this.time_period = time_period;
 		this.ref_area = ref_area;
 		this.indicator = indicator;
 		this.breakdown = breakdown;
 		this.unit_measure = unit_measure;
 		this.value = value;
-		// this.flag=flag;
-		// this.note=note;
+
 	}
 
-	/*
-	 * public String getObservation() { return observation; } public void
-	 * setObservation(String observation) { this.observation = observation; }
-	 */
 	public int getTime_period() {
 		return time_period;
 	}
@@ -77,19 +78,28 @@ public class Element {
 	public void setValue(float value) {
 		this.value = value;
 	}
-	/*
-	 * public String getFlag() {
-	 * 
-	 * return flag; } public void setFlag(String flag) { this.flag = flag; } public
-	 * String getNote() { return note; } public void setNote(String note) {
-	 * this.note = note; }
-	 */
 
 	@Override
 	public String toString() {
 		return String.format(
 				"Element [time_period:%d, ref_area=%s, indicator=%s, value=%f, breakdown=%s, unit_measure=%s]",
 				time_period, ref_area, indicator, value, breakdown, unit_measure);
+	}
+
+	public static String type(String x) {
+		if (x.equals("time_period"))
+			return "Int";
+		if (x.equals("ref_area"))
+			return "String";
+		if (x.equals("indicator"))
+			return "String";
+		if (x.equals("breakdown"))
+			return "String";
+		if (x.equals("value"))
+			return "Float";
+		if (x.equals("unit_measure"))
+			return "String";
+		return null;
 	}
 
 }
