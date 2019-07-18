@@ -1,14 +1,14 @@
 package com.app.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.app.model.Element;
-import com.app.model.Stats;
 
 public class Calculator {
 	/*
 	 * metodi che calcolano la varianza, valor medio, massimo, minimo, somma,
-	 * conteggio
+	 * conteggio degli elementi e degli attributi di tipo String unici
 	 */
 
 	private static float value;
@@ -42,5 +42,18 @@ public class Calculator {
 		}
 		
 		return value;
+	}
+	
+	public static HashMap<String,Integer> counter(ArrayList<String> column){
+		 int i;
+		 HashMap<String,Integer> uniqueElements = new HashMap<String,Integer>();
+		 for (i=0; i<column.size();i++) {
+			if (!uniqueElements.containsKey(column.get(i))) {
+				uniqueElements.put(column.get(i), 1);
+			} else {
+				uniqueElements.replace(column.get(i), uniqueElements.get(column.get(i)), uniqueElements.get(column.get(i))+1);
+			}
+		 }
+		 return uniqueElements;
 	}
 }

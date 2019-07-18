@@ -1,13 +1,12 @@
 package com.app.service;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
 import com.app.model.Element;
 import com.app.model.Metadata;
 import com.app.model.Stats;
@@ -34,7 +33,6 @@ public class AppService {
 	public Element printElement(int i) {
 		if (i > v.size() || i < 0) {
 			throw new RuntimeException("Indice non valido");
-			// throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 		return v.get(i);
 	}
@@ -89,15 +87,15 @@ public class AppService {
 
 	}
 
-	public ArrayList<Element> multifilter(String logicOperator, String fieldName, String operator1, Object value1,
+	public ArrayList<Element> multifilter(String logicOperator, String operator1, Object value1,
 			String operator2, Object value2) {
 		ArrayList<Element> list1 = new ArrayList<Element>();
-		list1 = (ArrayList<Element>) filteredData.select(v, fieldName, operator1, value1);
+		list1 = (ArrayList<Element>) filteredData.select(v, "value", operator1, value1);
 		if (logicOperator.equals("and")) {
-			return (ArrayList<Element>) filteredData.select(list1, fieldName, operator2, value2);
+			return (ArrayList<Element>) filteredData.select(list1, "value", operator2, value2);
 		} else if (logicOperator.equals("or")) {
 			ArrayList<Element> list2 = new ArrayList<Element>();
-			list2 = (ArrayList<Element>) filteredData.select(v, fieldName, operator2, value2);
+			list2 = (ArrayList<Element>) filteredData.select(v, "value", operator2, value2);
 			return filteredData.merge(list1, list2);
 		} else {
 			throw new RuntimeException("Operatore logico non valido");
@@ -110,6 +108,16 @@ public class AppService {
 		ArrayList<Element> list2 = new ArrayList<Element>();
 		list2 = (ArrayList<Element>) filteredData.select(list1, "value", operator2, value2);
 		return list2;
+	}
+	
+	public HashMap<String,Integer> counter(String fieldName) throws NoSuchMethodException, RuntimeException, IllegalAccessException, ReflectiveOperationException{
+		ArrayList<String> inputColumn = new ArrayList<String>();
+		int i;
+		for (i=0; i<v.size();i++) {
+			Method m = v.get(i).getClass().getMethod("get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1), null);
+			inputColumn.add((String) m.invoke(v.get(i)));
+		}
+		return Calculator.counter(inputColumn);
 	}
 
 }

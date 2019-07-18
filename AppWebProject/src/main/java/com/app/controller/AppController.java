@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,17 +78,22 @@ public class AppController {
 			@PathVariable("value") float value) {
 		return appService.filter(field, operator, value);
 	}
-	@GetMapping("/filtroValore/{logicOperator}/{field}/{operator1}/{value1}/{operator2}/{value2}")
-	public ArrayList<Element> data13(@PathVariable("field") String field, @PathVariable("operator1") String operator1,
+	@GetMapping("/filtroValore/{logicOperator}/{operator1}/{value1}/{operator2}/{value2}")
+	public ArrayList<Element> data13( @PathVariable("operator1") String operator1,
 			@PathVariable("value1") float value1,@PathVariable("logicOperator") String logicOperator, @PathVariable("operator2") String operator2,
 			@PathVariable("value2") float value2) {
-		return appService.multifilter(logicOperator,field, operator1, value1, operator2, value2);
+		return appService.multifilter(logicOperator,operator1, value1, operator2, value2);
 	}
 	
 	@GetMapping("/filtro/{value1}/{operator2}/{value2}")
 	public ArrayList<Element> data14(@PathVariable("value1") String value1,@PathVariable("operator2") String operator2,
 			@PathVariable("value2") float value2) {
 		return appService.multifilter(value1, operator2, value2);
+	}
+	
+	@GetMapping("/elementiunici/{fieldName}")
+	public HashMap<String,Integer> data15(@PathVariable String fieldName) throws NoSuchMethodException, IllegalAccessException, RuntimeException, ReflectiveOperationException{
+		return appService.counter(fieldName);
 	}
 	
 	

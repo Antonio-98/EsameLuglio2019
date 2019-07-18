@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.app.model.Element;
+
 public class FilterUtils<T> {
 
 	public static boolean check(Object value, String operator, Object th) {
@@ -54,16 +56,16 @@ public class FilterUtils<T> {
 		}
 		return out;
 	}
-	
-	public ArrayList<com.app.model.Element> merge(ArrayList<com.app.model.Element> list1, ArrayList<com.app.model.Element> list2){
+
+	public ArrayList<Element> merge(ArrayList<Element> list1,
+			ArrayList<Element> list2) {
 		int i;
-		for (i=0; i<list2.size();i++) {
-			if(!list1.contains(( list2).get(i))) {
+		for (i = 0; i < list2.size(); i++) {
+			if (!list1.contains((list2).get(i))) {
 				list1.add(list2.get(i));
 			}
 		}
 		return list1;
 	}
-	
-	
+
 }
