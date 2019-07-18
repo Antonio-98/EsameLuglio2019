@@ -25,7 +25,8 @@ public class AppService {
 	public AppService() {
 		File f = new File("dataset.csv");
 		if (!f.exists()) {
-			Utils.jsonDecode("http://data.europa.eu/euodp/data/api/3/action/package_show?id=yGVKnIzbkC2ZHpT6jQouDg", "dataset.csv");
+			Utils.jsonDecode("http://data.europa.eu/euodp/data/api/3/action/package_show?id=yGVKnIzbkC2ZHpT6jQouDg",
+					"dataset.csv");
 		}
 		Utils.csvParse(v, header, "dataset.csv");
 	}
@@ -41,26 +42,26 @@ public class AppService {
 		return v;
 	}
 
-	public Stats Sum() {
-		return new Stats("Sum", "Somma di tutti i valori", Calculator.Sum(v));
+	public Stats sum() {
+		return new Stats("Sum", "Somma di tutti i valori", Calculator.sum(v));
 	}
 
-	public Stats Avg() {
-		return new Stats("Avg", "Valore medio per pc_schools", Calculator.Sum(v) / v.size());
+	public Stats avg() {
+		return new Stats("Avg", "Valore medio per pc_schools", Calculator.sum(v) / v.size());
 	}
 
-	public Stats Min() {
-		return new Stats("Min", "Valore minimo per pc_schools", Calculator.Min(v));
+	public Stats min() {
+		return new Stats("Min", "Valore minimo per pc_schools", Calculator.min(v));
 	}
 
-	public Stats Max() {
-		return new Stats("Max", "Valore massimo per pc_schools", Calculator.Max(v));
+	public Stats max() {
+		return new Stats("Max", "Valore massimo per pc_schools", Calculator.max(v));
 	}
 
-	public Stats StdDev() {
+	public Stats stdDev() {
 		float value = 0;
 		int i;
-		double avg = Avg().getValue();
+		double avg = avg().getValue();
 		for (i = 0; i < v.size(); i++) {
 			value += Math.pow(v.get(i).getValue() - avg, 2);
 		}
@@ -74,11 +75,11 @@ public class AppService {
 
 	public ArrayList<Stats> Stats() {
 		ArrayList<Stats> statistics = new ArrayList<Stats>();
-		statistics.add(Sum());
-		statistics.add(Avg());
-		statistics.add(Min());
-		statistics.add(Max());
-		statistics.add(StdDev());
+		statistics.add(sum());
+		statistics.add(avg());
+		statistics.add(min());
+		statistics.add(max());
+		statistics.add(stdDev());
 		return statistics;
 	}
 
@@ -87,8 +88,8 @@ public class AppService {
 
 	}
 
-	public ArrayList<Element> multifilter(String logicOperator, String operator1, Object value1,
-			String operator2, Object value2) {
+	public ArrayList<Element> multifilter(String logicOperator, String operator1, Object value1, String operator2,
+			Object value2) {
 		ArrayList<Element> list1 = new ArrayList<Element>();
 		list1 = (ArrayList<Element>) filteredData.select(v, "value", operator1, value1);
 		if (logicOperator.equals("and")) {
@@ -109,12 +110,14 @@ public class AppService {
 		list2 = (ArrayList<Element>) filteredData.select(list1, "value", operator2, value2);
 		return list2;
 	}
-	
-	public HashMap<String,Integer> counter(String fieldName) throws NoSuchMethodException, RuntimeException, IllegalAccessException, ReflectiveOperationException{
+
+	public HashMap<String, Integer> counter(String fieldName)
+			throws NoSuchMethodException, RuntimeException, IllegalAccessException, ReflectiveOperationException {
 		ArrayList<String> inputColumn = new ArrayList<String>();
 		int i;
-		for (i=0; i<v.size();i++) {
-			Method m = v.get(i).getClass().getMethod("get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1), null);
+		for (i = 0; i < v.size(); i++) {
+			Method m = v.get(i).getClass()
+					.getMethod("get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1), null);
 			inputColumn.add((String) m.invoke(v.get(i)));
 		}
 		return Calculator.counter(inputColumn);

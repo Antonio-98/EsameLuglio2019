@@ -13,13 +13,13 @@ public class Calculator {
 
 	private static float value;
 
-	public static float Sum(ArrayList<Element> data) {
+	public static float sum(ArrayList<Element> data) {
 		value=0;
 		data.forEach(Element -> value += Element.getValue());
 		return value;
 	}
 	
-	public static float Min(ArrayList<Element> data) {
+	public static float min(ArrayList<Element> data) {
 		int i = 0;
 		value = 1;
 		for (i=0; i<data.size();i++) {
@@ -31,7 +31,7 @@ public class Calculator {
 		return value;
 	}
 	
-	public static float Max(ArrayList<Element> data) {
+	public static float max(ArrayList<Element> data) {
 		int i = 0;
 		value=0;
 		for (i=0; i<data.size();i++) {
