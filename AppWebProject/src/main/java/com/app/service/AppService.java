@@ -185,7 +185,7 @@ public class AppService {
 	 */
 	public ArrayList<Element> filter(String fieldName, String operator, Object value) {
 		if (!filteredData.rightOperator(operator)) {
-			throw new RuntimeException("Operatore di confronto non valido. Operatori validi: gt, lt, equ");
+			throw new RuntimeException("Operatore di confronto non valido. Operatori validi: gt, lt, eq");
 		}
 		return (ArrayList<Element>) filteredData.select(records, fieldName, operator, value);
 
@@ -225,7 +225,7 @@ public class AppService {
 			Object value2) {
 		// check dell'operatore
 		if (!filteredData.rightOperator(operator1, operator2)) {
-			throw new RuntimeException("Operatore di confronto non valido. Operatori validi: gt, lt, equ");
+			throw new RuntimeException("Operatore di confronto non valido. Operatori validi: gt, lt, eq");
 		}
 		ArrayList<Element> list1 = new ArrayList<Element>();
 		list1 = (ArrayList<Element>) filteredData.select(records, "value", operator1, value1);
@@ -256,7 +256,7 @@ public class AppService {
 	 */
 	public ArrayList<Element> multifilter(Object value1, String operator2, Object value2) {
 		if (!filteredData.rightOperator(operator2)) {
-			throw new RuntimeException("Operatore di confronto non valido. Operatori validi: gt, lt, equ");
+			throw new RuntimeException("Operatore di confronto non valido. Operatori validi: gt, lt, eq");
 		}
 		ArrayList<Element> list1 = new ArrayList<Element>();
 		list1 = (ArrayList<Element>) filteredData.select(records, "ref_area", "eq", value1);

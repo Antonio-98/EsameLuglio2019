@@ -13,7 +13,7 @@ User</text>
 <rect fill="#ffffff" height="728" stroke="#ffffff" stroke-width="1" width="392" x="174" y="14"/>
 <rect fill="none" height="728" stroke="#000000" stroke-width="1" width="392" x="174" y="14"/>
 <rect fill="none" height="727" stroke="#000000" stroke-width="1" width="391" x="174" y="14"/>
-<text font-family="Dialog" font-size="12" font-weight="bold" x="329" y="29">
+<text font-family="Dialog" font-size="12" font-weight="bold" x="329" y="28">
 App Controller</text>
 <ellipse cx="364" cy="78" fill="#000000" rx="70.0" ry="24.0" stroke="#000000" stroke-width="1"/>
 <ellipse cx="364" cy="78" fill="#ffffff" rx="69.0" ry="23.0" stroke="#ffffff" stroke-width="1"/>
@@ -53,8 +53,6 @@ Filter dataset with one parameter and one threshold</text>
 Count unique elements and repetitions relative to a parameter</text>
 <polyline fill="none" points="53,223 304,193" stroke="#000000" stroke-width="1"/>
 <polyline fill="none" points="303,151 53,223" stroke="#000000" stroke-width="1"/>
-<ellipse cx="178" cy="187" fill="#000000" rx="0.5" ry="0.5" stroke="#000000" stroke-width="1"/>
-<ellipse cx="179" cy="188" fill="#ffffff" rx="-0.5" ry="-0.5" stroke="#ffffff" stroke-width="1"/>
 <polyline fill="none" points="321,97 52,220" stroke="#000000" stroke-width="1"/>
 <polyline fill="none" points="302,235 54,236" stroke="#000000" stroke-width="1"/>
 <polyline fill="none" points="334,630 49,285" stroke="#000000" stroke-width="1"/>
@@ -65,7 +63,7 @@ Count unique elements and repetitions relative to a parameter</text>
 <rect fill="#ffffff" height="800" stroke="#ffffff" stroke-width="1" width="384" x="598" y="14"/>
 <rect fill="none" height="800" stroke="#000000" stroke-width="1" width="384" x="598" y="14"/>
 <rect fill="none" height="799" stroke="#000000" stroke-width="1" width="383" x="598" y="14"/>
-<text font-family="Dialog" font-size="12" font-weight="bold" x="756" y="29">
+<text font-family="Dialog" font-size="12" font-weight="bold" x="756" y="28">
 App Service</text>
 <ellipse cx="780" cy="70" fill="#000000" rx="70.0" ry="24.0" stroke="#000000" stroke-width="1"/>
 <ellipse cx="780" cy="70" fill="#ffffff" rx="69.0" ry="23.0" stroke="#ffffff" stroke-width="1"/>
@@ -85,7 +83,7 @@ Print statistics</text>
 <rect fill="#ffffff" height="240" stroke="#ffffff" stroke-width="1" width="184" x="1014" y="14"/>
 <rect fill="none" height="240" stroke="#000000" stroke-width="1" width="184" x="1014" y="14"/>
 <rect fill="none" height="239" stroke="#000000" stroke-width="1" width="183" x="1014" y="14"/>
-<text font-family="Dialog" font-size="12" font-weight="bold" x="1077" y="29">
+<text font-family="Dialog" font-size="12" font-weight="bold" x="1077" y="28">
 Calculator</text>
 <ellipse cx="1110" cy="59" fill="#000000" rx="56.0" ry="21.0" stroke="#000000" stroke-width="1"/>
 <ellipse cx="1110" cy="59" fill="#ffffff" rx="55.0" ry="20.0" stroke="#ffffff" stroke-width="1"/>
@@ -100,8 +98,6 @@ Find Minimum value</text>
 <text font-family="Dialog" font-size="12" x="1052" y="168">
 Find Maximum Value</text>
 <polyline fill="none" points="1069,73 820,164" stroke="#000000" stroke-width="1"/>
-<ellipse cx="944" cy="115" fill="#000000" rx="0.5" ry="0.5" stroke="#000000" stroke-width="1"/>
-<ellipse cx="945" cy="116" fill="#ffffff" rx="-0.5" ry="-0.5" stroke="#ffffff" stroke-width="1"/>
 <polyline fill="none" points="1038,172 835,172" stroke="#000000" stroke-width="1"/>
 <polyline fill="none" points="829,168 1048,122" stroke="#000000" stroke-width="1"/>
 <ellipse cx="781" cy="227" fill="#000000" rx="55.0" ry="21.0" stroke="#000000" stroke-width="1"/>
@@ -132,7 +128,7 @@ Filter dataset with one parameter and one threshold</text>
 Count unique elements and repetitions relative to a parameter</text>
 <polyline fill="none" points="508,406 646,406" stroke="#000000" stroke-width="1"/>
 <polyline fill="none" points="494,490 662,490" stroke="#000000" stroke-width="1"/>
-<polyline fill="none" points="531,576 638,576" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="532,576 638,576" stroke="#000000" stroke-width="1"/>
 <polyline fill="none" points="551,306 606,306" stroke="#000000" stroke-width="1"/>
 <ellipse cx="783" cy="763" fill="#000000" rx="129.0" ry="37.0" stroke="#000000" stroke-width="1"/>
 <ellipse cx="783" cy="763" fill="#ffffff" rx="128.0" ry="36.0" stroke="#ffffff" stroke-width="1"/>
@@ -143,8 +139,8 @@ Download the .csv file and execute parsing</text>
 <text font-family="Dialog" font-size="12" x="1062" y="221">
 Element counter</text>
 <polyline fill="none" points="909,274 1058,233" stroke="#000000" stroke-width="1"/>
-<rect fill="#ffffff" height="192" stroke="#ffffff" stroke-width="1" width="176" x="1014" y="286"/>
-<rect fill="none" height="192" stroke="#000000" stroke-width="1" width="176" x="1014" y="286"/>
+<rect fill="#ffffff" height="240" stroke="#ffffff" stroke-width="1" width="176" x="1014" y="286"/>
+<rect fill="none" height="240" stroke="#000000" stroke-width="1" width="176" x="1014" y="286"/>
 <ellipse cx="1103" cy="335" fill="#000000" rx="73.0" ry="25.0" stroke="#000000" stroke-width="1"/>
 <ellipse cx="1103" cy="335" fill="#ffffff" rx="72.0" ry="24.0" stroke="#ffffff" stroke-width="1"/>
 <text font-family="Dialog" font-size="12" x="1044" y="336">
@@ -158,32 +154,42 @@ Check condition</text>
 <text font-family="Dialog" font-size="12" x="1056" y="446">
 Merge array lists</text>
 <polyline fill="none" points="1103,366 1103,360" stroke="#000000" stroke-width="1"/>
-<rect fill="none" height="191" stroke="#000000" stroke-width="1" width="175" x="1014" y="286"/>
-<text font-family="Dialog" font-size="12" font-weight="bold" x="1074" y="301">
+<rect fill="none" height="239" stroke="#000000" stroke-width="1" width="175" x="1014" y="286"/>
+<text font-family="Dialog" font-size="12" font-weight="bold" x="1074" y="300">
 Filter Utils</text>
 <polyline fill="none" points="848,458 1060,355" stroke="#000000" stroke-width="1"/>
-<polyline fill="none" points="899,475 1042,453" stroke="#000000" stroke-width="1"/>
-<polyline fill="none" points="900,380 1041,348" stroke="#000000" stroke-width="1"/>
-<polyline fill="none" points="844,536 1073,357" stroke="#000000" stroke-width="1"/>
-<polyline fill="none" points="827,631 1080,358" stroke="#000000" stroke-width="1"/>
-<rect fill="#ffffff" height="176" stroke="#ffffff" stroke-width="1" width="152" x="1014" y="510"/>
-<rect fill="none" height="176" stroke="#000000" stroke-width="1" width="152" x="1014" y="510"/>
-<ellipse cx="1093" cy="555" fill="#000000" rx="55.0" ry="21.0" stroke="#000000" stroke-width="1"/>
-<ellipse cx="1093" cy="555" fill="#ffffff" rx="54.0" ry="20.0" stroke="#ffffff" stroke-width="1"/>
-<text font-family="Dialog" font-size="12" x="1059" y="556">
+<polyline fill="none" points="897,473 1042,453" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="899,380 1041,348" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="843,536 1073,357" stroke="#000000" stroke-width="1"/>
+<ellipse cx="956" cy="446" fill="#000000" rx="0.5" ry="0.5" stroke="#000000" stroke-width="1"/>
+<ellipse cx="957" cy="447" fill="#ffffff" rx="-0.5" ry="-0.5" stroke="#ffffff" stroke-width="1"/>
+<polyline fill="none" points="826,631 1080,358" stroke="#000000" stroke-width="1"/>
+<rect fill="#ffffff" height="176" stroke="#ffffff" stroke-width="1" width="152" x="1014" y="566"/>
+<rect fill="none" height="176" stroke="#000000" stroke-width="1" width="152" x="1014" y="566"/>
+<ellipse cx="1093" cy="611" fill="#000000" rx="55.0" ry="21.0" stroke="#000000" stroke-width="1"/>
+<ellipse cx="1093" cy="611" fill="#ffffff" rx="54.0" ry="20.0" stroke="#ffffff" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="1059" y="612">
 jsonDecode</text>
-<ellipse cx="1093" cy="651" fill="#000000" rx="55.0" ry="21.0" stroke="#000000" stroke-width="1"/>
-<ellipse cx="1093" cy="651" fill="#ffffff" rx="54.0" ry="20.0" stroke="#ffffff" stroke-width="1"/>
-<text font-family="Dialog" font-size="12" x="1067" y="652">
+<ellipse cx="1093" cy="715" fill="#000000" rx="55.0" ry="21.0" stroke="#000000" stroke-width="1"/>
+<ellipse cx="1093" cy="715" fill="#ffffff" rx="54.0" ry="20.0" stroke="#ffffff" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="1067" y="716">
 csvParse</text>
-<ellipse cx="1093" cy="603" fill="#000000" rx="55.0" ry="21.0" stroke="#000000" stroke-width="1"/>
-<ellipse cx="1093" cy="603" fill="#ffffff" rx="54.0" ry="20.0" stroke="#ffffff" stroke-width="1"/>
-<text font-family="Dialog" font-size="12" x="1065" y="604">
+<ellipse cx="1093" cy="667" fill="#000000" rx="55.0" ry="21.0" stroke="#000000" stroke-width="1"/>
+<ellipse cx="1093" cy="667" fill="#ffffff" rx="54.0" ry="20.0" stroke="#ffffff" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="1065" y="668">
 Download</text>
-<polyline fill="none" points="1094,575 1093,582" stroke="#000000" stroke-width="1"/>
-<polyline fill="none" points="835,729 1065,573" stroke="#000000" stroke-width="1"/>
-<polyline fill="none" points="866,734 1053,665" stroke="#000000" stroke-width="1"/>
-<rect fill="none" height="175" stroke="#000000" stroke-width="1" width="151" x="1014" y="510"/>
-<text font-family="Dialog" font-size="12" font-weight="bold" x="1077" y="525">
+<polyline fill="none" points="1093,632 1093,646" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="847,730 1058,627" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="895,745 1041,722" stroke="#000000" stroke-width="1"/>
+<rect fill="none" height="175" stroke="#000000" stroke-width="1" width="151" x="1014" y="566"/>
+<text font-family="Dialog" font-size="12" font-weight="bold" x="1077" y="580">
 Utils</text>
+<ellipse cx="1101" cy="499" fill="#000000" rx="55.0" ry="21.0" stroke="#000000" stroke-width="1"/>
+<ellipse cx="1101" cy="499" fill="#ffffff" rx="54.0" ry="20.0" stroke="#ffffff" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="1062" y="500">
+Right operator</text>
+<polyline fill="none" points="904,548 1054,510" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="855,634 1069,516" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="909,495 1046,495" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="886,435 1057,486" stroke="#000000" stroke-width="1"/>
 </svg>

@@ -100,7 +100,7 @@ public class FilterUtils<T> {
 	}
 
 	/**
-	 * Controlla la validità degli operatori di confronti inseriti per il
+	 * Controlla la validità degli operatori di confronto inseriti per il
 	 * filtraggio.
 	 * 
 	 * @param operator Operatori inseriti, <strong>NOTA</strong> Numero di
