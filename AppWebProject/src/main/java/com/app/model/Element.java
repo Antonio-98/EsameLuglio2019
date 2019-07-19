@@ -4,7 +4,7 @@ package com.app.model;
  * Classe che definisce il singolo record del dataset creando oggetti i cui
  * attributi rappresentano le singole colonne di dati del file .csv utilizzato
  * nel progetto. Sono implementati i canonici setter e getter, il metodo
- * doString e un metodo che fornisce come stringa il tipo di ogni attributo
+ * toString e un metodo che fornisce come stringa il tipo di ogni attributo.
  * 
  * @author Giulia Temperini, Paolo Cacciatore
  * @version 1.0
@@ -86,6 +86,14 @@ public class Element {
 				time_period, ref_area, indicator, value, breakdown, unit_measure);
 	}
 
+	/**
+	 * Restituisce come Stringa il tipo dell'attributo il cui nome viene dato come
+	 * parametro in ingresso.
+	 * 
+	 * @param x Nome dell'attributo
+	 * @return <strong>tipo dell'attributo inserito</strong> se tale attributo
+	 *         esiste, <strong>null</strong> se l'attributo inserito non esiste
+	 */
 	public static String type(String x) {
 		if (x.equals("time_period"))
 			return "Int";

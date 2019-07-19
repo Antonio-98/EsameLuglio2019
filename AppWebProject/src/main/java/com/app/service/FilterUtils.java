@@ -3,12 +3,29 @@ package com.app.service;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import com.app.model.Element;
 
+/**
+ * Libreria di metodi statici utilizzati per l'operazione di filtraggio sul
+ * dataset.
+ * 
+ * @author Giulia Temperini, Paolo Cacciatore
+ * @version 1.0
+ */
 public class FilterUtils<T> {
-
+	/**
+	 * Effettua il confronto tra i parametri value e th. Il criterio del confronto
+	 * &egrave; definito da operator.
+	 * 
+	 * @param th       Valore di soglia/confronto
+	 * @param operator Operatore condizionale per il confronto
+	 * @param value    Valore di soglia/di confronto
+	 * @return <strong>true</strong> se il confronto ha avuto esito positivo
+	 *         <strong>false</strong> se il confronto ha avuto esito negativo
+	 */
 	public static boolean check(Object value, String operator, Object th) {
 		if (value instanceof Number && th instanceof Number) {
 			Double thC = ((Number) th).doubleValue();
@@ -26,6 +43,17 @@ public class FilterUtils<T> {
 		return false;
 	}
 
+	/**
+	 * Data la collezione src in ingresso, per ogni suo elemento effettua il
+	 * confronto tra il valore assunto dall'attributo identificato da fieldName e il
+	 * parametro value. I criteri del confronto sono definiti da operator.
+	 * 
+	 * @param src       Collezione a cui applicare il filtraggio
+	 * @param fieldName Nome dell'attributo il cui valore assunto viene confrontato
+	 * @param operator  Operatore condizionale per il confronto
+	 * @param value     Valore di soglia/di confronto
+	 * @return Nuova collezione contenente gli elementi filtrati
+	 */
 	public Collection<T> select(Collection<T> src, String fieldName, String operator, Object value) {
 		Collection<T> out = new ArrayList<T>();
 		for (T item : src) {
@@ -37,28 +65,31 @@ public class FilterUtils<T> {
 					if (FilterUtils.check(tmp, operator, value))
 						out.add(item);
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new RuntimeException("Causa di errore: " + e.getMessage());
+
 				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new RuntimeException("Causa di errore: " + e.getMessage());
 				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new RuntimeException("Causa di errore: " + e.getMessage());
 				}
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new RuntimeException("Field errato");
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new RuntimeException("Causa di errore: " + e.getMessage());
 			}
 		}
 		return out;
 	}
 
-	public ArrayList<Element> merge(ArrayList<Element> list1,
-			ArrayList<Element> list2) {
+	/**
+	 * Effettua l'unione di due ArrayList di {@link Element} senza duplicati.
+	 * 
+	 * @param list1
+	 * @param list2
+	 * @return list1 unita a list2 senza l'aggiunta degli elementi già presenti in
+	 *         list1
+	 */
+	public ArrayList<Element> merge(ArrayList<Element> list1, ArrayList<Element> list2) {
 		int i;
 		for (i = 0; i < list2.size(); i++) {
 			if (!list1.contains((list2).get(i))) {
@@ -66,6 +97,26 @@ public class FilterUtils<T> {
 			}
 		}
 		return list1;
+	}
+
+	/**
+	 * Controlla la validità degli operatori di confronti inseriti per il
+	 * filtraggio.
+	 * 
+	 * @param operator Operatori inseriti, <strong>NOTA</strong> Numero di
+	 *                 operatori variabili
+	 * @return <strong>true</strong> se tutti gli operatori sono validi,
+	 *         <strong>false</strong> se almeno un operatore &egrave; errato
+	 */
+	public boolean rightOperator(String... operator) {
+		for (String x : operator) {
+			// if(!Arrays.asList("gt","lt","eq").contains(x))
+			if (!("gt".equals(x) || "lt".equals(x) || "eq".equals(x)))
+				return false;
+		}
+		// throw new RuntimeException("Operatore di confronto non valido");
+		return true;
+
 	}
 
 }

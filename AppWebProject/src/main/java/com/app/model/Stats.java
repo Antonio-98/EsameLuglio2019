@@ -1,8 +1,9 @@
 package com.app.model;
 
 /**
- * Classe implementata per rappresentare gli indicatori statistici relativi al
- * dataset
+ * Classe implementata per rappresentare gli indicatori matematici/statistici
+ * relativi al dataset. Sono implementati i canonici getter e setter relativi a
+ * ciascun attributo.
  * 
  * @author Giulia Temperini, Paolo Cacciatore
  * @version 1.0

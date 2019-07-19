@@ -1,10 +1,5 @@
 package com.app.utils;
 
-/**
- * Libreria di metodi statici utilizzati all'avvio per inizializzare la Collection contenente i dati
- * @author Giulia Temperini, Paolo Cacciatore
- * @version 1.0
- */
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,14 +21,21 @@ import org.json.simple.parser.ParseException;
 import com.app.model.Element;
 import com.app.model.Metadata;
 
+/**
+ * Libreria di metodi statici utilizzati all'avvio per inizializzare la
+ * Collection contenente i dati.
+ * 
+ * @author Giulia Temperini, Paolo Cacciatore
+ * @version 1.0
+ */
 public class Utils {
 
 	/**
-	 * Metodo che, dato un indirizzo ad una pagina codificata in JSON, ne effettua
-	 * la decodifica, per poi eseguire il download del dataset dall'URL ricavato
+	 * Dato un indirizzo ad una pagina codificata in JSON, ne effettua la
+	 * decodifica, per poi eseguire il download del dataset dall'URL ricavato.
 	 * 
-	 * @param url      l'url della pagina JSON da decodificare
-	 * @param fileName nome del file scaricato
+	 * @param url      l'url assoluto della pagina JSON da decodificare
+	 * @param fileName nome del file contenente il dataset
 	 */
 
 	public static void jsonDecode(String url, String fileName) {
@@ -82,7 +84,7 @@ public class Utils {
 
 	/**
 	 * Metodo privato utilizzato da {@link jsonDecode} per effettuare il download e
-	 * salvataggio nella directory
+	 * salvataggio nella directory.
 	 * 
 	 * @param url
 	 * @param fileName

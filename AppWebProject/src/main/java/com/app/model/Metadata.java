@@ -2,7 +2,8 @@ package com.app.model;
 
 /**
  * 
- * Classe implementata per rappresentare i metadati relativi al dataset
+ * Classe implementata per rappresentare i metadati relativi al dataset. Sono
+ * implementati i canonici getter e setter relativi a ciascun attributo.
  * 
  * @author Giulia Temperini, Paolo Cacciatore
  * @version 1.0

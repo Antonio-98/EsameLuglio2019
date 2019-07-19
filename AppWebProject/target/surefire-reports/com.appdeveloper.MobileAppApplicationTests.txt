@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.appdeveloper.MobileAppApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 11.672 s <<< FAILURE! - in com.appdeveloper.MobileAppApplicationTests
+nonesisteindice1(com.appdeveloper.MobileAppApplicationTests)  Time elapsed: 0.599 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Indice non valido
+	at com.appdeveloper.MobileAppApplicationTests.nonesisteindice1(MobileAppApplicationTests.java:38)
+Caused by: java.lang.RuntimeException: Indice non valido
+	at com.appdeveloper.MobileAppApplicationTests.nonesisteindice1(MobileAppApplicationTests.java:38)
+
