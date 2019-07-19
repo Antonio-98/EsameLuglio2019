@@ -10,7 +10,7 @@ Tale dataset in formato *CSV* è reperibile al seguente URL:
 # Funzionamento applicazione
 ## Avvio 
 All'avvio dell'applicazione viene effettuata la decodifica del JSON dell'URL sopra indicato, contenente il link al dataset. Successivamente quest'ultimo viene scaricato, salvato nella directory e rappresentato tramite un'opportuna struttura dati.
-***Nota***:il download del dataset avviene solo al primo avvio dell'applicazione.
+***Nota***: il download del dataset avviene solo al primo avvio dell'applicazione.
 ## Richieste HTTP
 Tramite richieste GET con rotte determinate il client può richiedere la restituzione di particolari dati o effettuare delle operazioni di filtraggio sul dataset.
 
@@ -49,7 +49,7 @@ URL per l'applicativo:
 Sono previste due tipologie di filtri: semplici e combinati.
 #### Filtri semplici 
 
- - Restituzione di tutti gli elementi che presentano il valore dell'attributo fieldName uguale a value.
+ - Restituzione di tutti gli elementi che presentano il valore dell'attributo field uguale a value.
 
 1. Per gli attributi di tipo Stringa
 
@@ -61,6 +61,7 @@ Sono previste due tipologie di filtri: semplici e combinati.
 > 
 ***Esempio:*** 
 > /filtroStringa/ref_area/IT
+>
 > Restituisce tutti gli elementi con proprietà ref_area=IT;
 
 - Restituzione di tutti gli elementi che presentano il valore dell'attributo  field ***gt*** o ***lt*** o ***eq*** rispetto value.
@@ -102,7 +103,8 @@ L'attributo al quale applicare la computazione è solo value, per ciò non neces
  
 # Diagrammi UML
 ## Diagramma delle classi
+https://github.com/PaoloCacc/EsameLuglio2019/blob/master/AppWebProject/ClassDiagram.jpg
 
 ## Diagramma dei casi d'uso 
-
+https://github.com/PaoloCacc/EsameLuglio2019/blob/master/AppWebProject/DiagrammadeiCasidUso2.svg
 
