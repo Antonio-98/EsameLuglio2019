@@ -13,7 +13,11 @@ All'avvio dell'applicazione viene effettuata la decodifica del JSON dell'URL sop
 ***Nota***:il download del dataset avviene solo al primo avvio dell'applicazione.
 ## Richieste HTTP
 Tramite richieste GET con rotte determinate il client può richiedere la restituzione di particolari dati o effettuare delle operazioni di filtraggio sul dataset.
+
 Di seguito vengono specificate le rotte relative a ciascuna richiesta.
+
+URL per l'applicativo:
+> `/http://localhost:8080`
 ### Restituzione dati
 
  - Restituzione dei metadati in formato JSON:   
@@ -23,10 +27,15 @@ Di seguito vengono specificate le rotte relative a ciascuna richiesta.
  Indicatori disponibili: somma, valore minimo, valore massimo, valore medio, deviazione standard.   
 
 > `/sum`
->  `/min`
+
+> `/min`
+
 >  `/max`
+
 >  `/avg`
+
 >  `/stddev`
+
 >  `/stats`
 **Nota**: Quest'ultima richiesta prevede la restituzione dell'elenco di tutti gli indicatori.
  - Restituzione di tutti i dati in formato JSON:   
