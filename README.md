@@ -7,6 +7,33 @@ Tale applicazione prevede la gestione di un dataset tramite richieste HTTP da pa
 Tale dataset in formato *CSV* è reperibile al seguente URL:
 [http://data.europa.eu/euodp/data/api/3/action/package_show?id=yGVKnIzbkC2ZHpT6jQouDg](http://data.europa.eu/euodp/data/api/3/action/package_show?id=yGVKnIzbkC2ZHpT6jQouDg)
 
+# Descrizione dataset
+Il dataset in questione è uno dei risultati dell'indagine ESSIE riguardo le ICT nell'educazione nelle scuole europee (scuola primaria, scuola secondaria inferiore, scuola secondaria superiore, sia generale che professionale). Offre una panoramica sull'indicatore ***eun_web*** che rappresenta le scuole aventi un proprio sito web/home page.
+Ciascun elemento del dataset è caratterizzato da 6 attributi.
+- **indicator** -> **eun_web** per tutti i record. Indice statistico considerato.
+
+- **time_period** -> Anno di calcolo dell'indice. 
+
+- **unit_measure** -> **pc_schools** :La percentuale di scuole aventi un proprio sito web/home page.
+Comune a tutti i record.
+
+- **value** -> valore risultante dall'indagine. Tutti i valori sono normalizzati ad 1.
+              
+- **ref_area** -> Paese europeo dove è stato calcolato l'indice. Ciascun paese è definito dal codice nazionale a due lettere.
+
+> `Esempio: Italia -> "IT"` 
+
+- **breakdown** -> Voce di scomposizione per la quale vengono misurati i valori. Indica il grado delle scuole considerate.
+
+> `Esempio:  Scuola secondaria superiore professionale (voc sta per vocational) -> grade11voc`
+>
+> `            Scuola secondaria superiore generale -> grade11gen`
+>        
+> `            Scuola primaria -> grade4`
+>         
+> `            Scuola secondaria inferiore -> grade8 `
+
+
 # Funzionamento applicazione
 ## Avvio 
 All'avvio dell'applicazione viene effettuata la decodifica del JSON dell'URL sopra indicato, contenente il link al dataset. Successivamente quest'ultimo viene scaricato, salvato nella directory e rappresentato tramite un'opportuna struttura dati.
